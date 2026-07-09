@@ -8,11 +8,15 @@ tamper-evident audit trail.
 
 ## Install
 
-Use the official installer:
+The post-checkout setup wizard supplies a config token. Install the Clawmont
+security layer with the token-aware command:
 
 ```sh
-curl -fsSL https://api.clawmont.com/install.sh | bash
+curl -fsSL https://api.clawmont.com/install.sh | bash -s -- --config <your-token>
 ```
+
+Running the installer without `--config` installs OpenClaw only and prints the
+steps for obtaining a Clawmont token.
 
 ## Published benchmark
 
