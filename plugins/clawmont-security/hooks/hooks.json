@@ -1,0 +1,53 @@
+{
+  "$generated": "GENERATED — do not hand-edit. Source: tools/claude-code-hook/hook-events.mjs; rebuild with `npm run build:plugin-package`.",
+  "description": "Clawmont Security — inspects every tool call, every tool result, every prompt, and reports what it found at the end of each turn.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/clawmont-hook.mjs\"",
+            "timeout": 10,
+            "statusMessage": "Clawmont inspecting tool call…"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/clawmont-hook.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/clawmont-hook.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/clawmont-hook.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

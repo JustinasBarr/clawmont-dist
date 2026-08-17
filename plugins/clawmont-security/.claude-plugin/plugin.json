@@ -1,0 +1,16 @@
+{
+  "name": "clawmont-security",
+  "version": "0.1.0",
+  "description": "Runtime security for Claude Code. Inspects every tool call before it runs and every tool result after, flags what looks dangerous, and keeps a tamper-evident local audit trail. Detection runs entirely on your machine. Installs in monitor mode — it never blocks anything until you turn blocking on.",
+  "author": {
+    "name": "Clawmont"
+  },
+  "homepage": "https://clawmont.com",
+  "keywords": [
+    "security",
+    "hooks",
+    "prompt-injection",
+    "agent-security",
+    "audit"
+  ]
+}

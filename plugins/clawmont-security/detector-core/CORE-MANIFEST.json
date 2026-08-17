@@ -1,0 +1,43 @@
+{
+  "generatedBy": "scripts/bundle-detector-core.mjs",
+  "pluginVersion": "1.1.8",
+  "entries": [
+    "tool-guard.js",
+    "path-guard.js",
+    "secret-scanner.js",
+    "input-normalizer.js",
+    "alert-events.js",
+    "shell-ast-guard.js",
+    "config-write-guard.js"
+  ],
+  "files": [
+    "alert-events.js",
+    "config-write-guard.js",
+    "detection-views.js",
+    "input-normalizer.js",
+    "intent-detection.js",
+    "judge-spend-gate.js",
+    "path-guard.js",
+    "persistence.js",
+    "secret-scanner.js",
+    "shell-ast-guard.js",
+    "ssrf-guard.js",
+    "tool-guard.js",
+    "url-reputation-scanner.js"
+  ],
+  "sha256": {
+    "alert-events.js": "3595efed33df9aa4f203a7b18e563d5053d33bf0273a6d4fea552050decf90ea",
+    "config-write-guard.js": "e17c0aa520d590f266cdda9331132cfea30a130a36de2d92d6793e623148d456",
+    "detection-views.js": "0c7421f2ad99751e092a58f5c830b45084cf6130c890f066a3f30a3297e874a7",
+    "input-normalizer.js": "8e906a7edb66c5895a1c8f3433ce5245df75945e72c9579513d12dca53794fb5",
+    "intent-detection.js": "163045fdd47f44653ea0221470fc211eccb85488fd39d360ac2167f766306284",
+    "judge-spend-gate.js": "1b92a2967537c7822dd3f70660f3a7a91c8f111a2f96e091cba86b6a3dd4b075",
+    "path-guard.js": "5d57a7029cce4bb415e634e6c8f927901f11bcaa2ec42eface617723a88dc6b0",
+    "persistence.js": "6fbf936c2ee1201fd604675263cac08978e782a4ffc68421ea3f7e524e61a391",
+    "secret-scanner.js": "386cee90566558768007d7f684fdf207f93972f3893c11fe87dd76436926c7f2",
+    "shell-ast-guard.js": "1fb7dbc8c52b170a69bfa16303e7224bc6dbd7aa148d764ed34ebe1e101845cd",
+    "ssrf-guard.js": "fe1c444cb3bef7f76af2e11acadcafa9de5097f15e542dcefa2efa7a8c315ef0",
+    "tool-guard.js": "6d6eb13529995bb31b4428839111a748f2e3918a3e61f5b801f9a83d8ee9b5b9",
+    "url-reputation-scanner.js": "ae0a5256d6615a2ec1e9220513510969bbcafd26b6277121ba6ded38ee6f492a"
+  }
+}

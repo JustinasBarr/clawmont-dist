@@ -1,0 +1,28 @@
+{
+  "generatedBy": "tools/claude-code-hook/scripts/build-plugin-package.mjs",
+  "sourceVersion": "0.1.0",
+  "mirrored": [
+    {
+      "file": "clawmont-hook.mjs",
+      "from": "tools/claude-code-hook/clawmont-hook.mjs",
+      "md5": "1ecd033f458ad97395e3f163b06102e2"
+    },
+    {
+      "file": "preflight.mjs",
+      "from": "tools/claude-code-hook/preflight.mjs",
+      "md5": "7b5a7e74fe48555a71ede438e7bade32"
+    },
+    {
+      "file": "audit-report.mjs",
+      "from": "tools/claude-code-hook/audit-report.mjs",
+      "md5": "9d924d7275c7b418e84813de52bb5979"
+    }
+  ],
+  "sourceCommit": "06fbdb6d13b02d504cdbd0d4d8f351de59e39d91",
+  "core": {
+    "path": "tools/claude-code-hook/detector-core",
+    "files": 14,
+    "bytes": 1177258
+  },
+  "note": "Copies of build output, committed on purpose: Claude Code clones a plugin and runs no build step. Regenerate with `npm run build:plugin-package`; drift fails `npm run check:plugin-package`."
+}
