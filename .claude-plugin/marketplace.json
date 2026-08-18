@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "clawmont",
+  "description": "Runtime security for AI coding agents — inspects tool calls as they happen, on your machine.",
+  "owner": {
+    "name": "Clawmont"
+  },
+  "plugins": [
+    {
+      "name": "clawmont-security",
+      "description": "Inspects every tool call before it runs and every tool result after, flags what looks dangerous, and keeps a tamper-evident local audit trail. Detection runs entirely on your machine. Installs in monitor mode — it never blocks anything until you turn blocking on.",
+      "author": {
+        "name": "Clawmont"
+      },
+      "category": "security",
+      "source": "./plugins/clawmont-security",
+      "homepage": "https://clawmont.com"
+    }
+  ]
+}

@@ -26,18 +26,18 @@
     "url-reputation-scanner.js"
   ],
   "sha256": {
-    "alert-events.js": "3595efed33df9aa4f203a7b18e563d5053d33bf0273a6d4fea552050decf90ea",
-    "config-write-guard.js": "e17c0aa520d590f266cdda9331132cfea30a130a36de2d92d6793e623148d456",
-    "detection-views.js": "0c7421f2ad99751e092a58f5c830b45084cf6130c890f066a3f30a3297e874a7",
-    "input-normalizer.js": "8e906a7edb66c5895a1c8f3433ce5245df75945e72c9579513d12dca53794fb5",
-    "intent-detection.js": "163045fdd47f44653ea0221470fc211eccb85488fd39d360ac2167f766306284",
-    "judge-spend-gate.js": "1b92a2967537c7822dd3f70660f3a7a91c8f111a2f96e091cba86b6a3dd4b075",
-    "path-guard.js": "5d57a7029cce4bb415e634e6c8f927901f11bcaa2ec42eface617723a88dc6b0",
-    "persistence.js": "6fbf936c2ee1201fd604675263cac08978e782a4ffc68421ea3f7e524e61a391",
-    "secret-scanner.js": "386cee90566558768007d7f684fdf207f93972f3893c11fe87dd76436926c7f2",
-    "shell-ast-guard.js": "1fb7dbc8c52b170a69bfa16303e7224bc6dbd7aa148d764ed34ebe1e101845cd",
-    "ssrf-guard.js": "fe1c444cb3bef7f76af2e11acadcafa9de5097f15e542dcefa2efa7a8c315ef0",
-    "tool-guard.js": "6d6eb13529995bb31b4428839111a748f2e3918a3e61f5b801f9a83d8ee9b5b9",
-    "url-reputation-scanner.js": "ae0a5256d6615a2ec1e9220513510969bbcafd26b6277121ba6ded38ee6f492a"
+    "alert-events.js": "ff801d682e9708da594f78fa0d69c481335f47a02b999192eb123fcf23d04da8",
+    "config-write-guard.js": "07bdba6c4be3fd43a366b9141f89f12a0e13d5af031b6b3ca5f519f046efc8e8",
+    "detection-views.js": "a2f64c2e64f477500840ee188ff1fe7e7028a905f19d551a22be59e1367e5a7a",
+    "input-normalizer.js": "13bb16748f1fba4ef021dd4a1b1359b49393511b7aa2fba9243474369798f7f2",
+    "intent-detection.js": "67b76fb73fd030475b4572d71343095e6d31c072b3546ec429f5c60be7bf7128",
+    "judge-spend-gate.js": "106db43d0acc116f42cf4ec4c5de89a5bc2a4e861244ba5df79a3ec2e6ff82b2",
+    "path-guard.js": "b9db47edb66bd11621b94a50a81d3484dc9a0e2c5521b9590385f617613b2990",
+    "persistence.js": "6e876f9c41e4aa3c047fd1a2ac5ce0e2266d1eebf95111ea6c2b58e1273f12ee",
+    "secret-scanner.js": "73d31c4b357cf534ce836a2e6a7fbcabc7b0f66b020448e1ff11c69b5dd640f1",
+    "shell-ast-guard.js": "e3073819c35afc8c5c6ab1815b341480ae179ad8a840cca60e5d8c38e9051241",
+    "ssrf-guard.js": "32816fdad6e2851188914bf8dae8b868500a4a54b221e48051f10b2c6306f415",
+    "tool-guard.js": "df279935de2d632d3a65c800cd5c9368e81fe45035484fada911d12cf7e91cb4",
+    "url-reputation-scanner.js": "48efe6060804f469e2a8dfd6e8783c55311bb12cc16beec0fceb0fce24878512"
   }
 }
