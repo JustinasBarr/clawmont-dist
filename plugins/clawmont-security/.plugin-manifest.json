@@ -6,8 +6,8 @@
       "file": "clawmont-hook.mjs",
       "from": "tools/claude-code-hook/clawmont-hook.mjs",
       "transform": "strip-comments",
-      "sourceMd5": "94f1b8d827db7fd64ec7bf7007cf2f65",
-      "md5": "ca3752cc1d5b99c9b0c56de64d0682af"
+      "sourceMd5": "eccea919cc1fae8c0655ccc2ce0aafab",
+      "md5": "5a9197f405942edc4db88909b3b280c5"
     },
     {
       "file": "preflight.mjs",
@@ -31,7 +31,7 @@
       "md5": "7b566d815de892e453fefb3c932c8afd"
     }
   ],
-  "sourceCommit": "e0abf1f7f3a5cc7eeb84fde5af02aa51bfa457c1",
+  "sourceCommit": "be23ae0986c4f026165993b1d2f798dcce44b347",
   "core": {
     "path": "tools/claude-code-hook/detector-core",
     "files": 14,

@@ -2988,6 +2988,75 @@ function redactPemBlocks(text) {
     body.trim() ? `${begin}[REDACTED]${end}` : `${begin}${body}${end}`);
 }
 
+const INVISIBLE_CHAR_RE =
+  /[\u00AD\u034F\u061C\u0300-\u036F\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\u206A-\u206F\uFE00-\uFE0F\uFEFF]/;
+
+function findInterruptedSpan(text, needle) {
+  const low = needle.toLowerCase();
+  for (let i = 0; i < text.length; i++) {
+    if (INVISIBLE_CHAR_RE.test(text[i])) continue;
+    if (text[i].toLowerCase() !== low[0]) continue;
+    let j = i;
+    let k = 0;
+    while (j < text.length && k < low.length) {
+      const ch = text[j];
+      if (INVISIBLE_CHAR_RE.test(ch)) { j++; continue; }
+      if (ch.toLowerCase() !== low[k]) break;
+      j++; k++;
+    }
+    if (k === low.length) return [i, j];
+  }
+  return null;
+}
+
+function decodingsOf(tok) {
+  const out = [];
+  if (/^[A-Za-z0-9+/=_-]+$/.test(tok) && tok.length >= 16) {
+    try { out.push(Buffer.from(tok, 'base64').toString('utf8')); } catch {   }
+  }
+  if (/^[0-9a-fA-F]+$/.test(tok) && tok.length % 2 === 0) {
+    try { out.push(Buffer.from(tok, 'hex').toString('utf8')); } catch {   }
+  }
+  if (tok.includes('%')) {
+    try { out.push(decodeURIComponent(tok)); } catch {   }
+  }
+  return out;
+}
+
+const ENCODED_TOKEN_RE = /[A-Za-z0-9+/=_-]{16,}|(?:%[0-9A-Fa-f]{2})+/g;
+
+function eraseEncodedSpelling(text, needle) {
+  return text.replace(ENCODED_TOKEN_RE, (tok) => {
+    for (const dec of decodingsOf(tok)) {
+      if (dec.includes(needle)) return '[REDACTED]';
+      for (const dec2 of decodingsOf(dec)) if (dec2.includes(needle)) return '[REDACTED]';
+    }
+    return tok;
+  });
+}
+
+function eraseSpelling(text, needle) {
+  if (!needle || needle.length < 8) return text;
+  if (text.includes(needle)) return text.split(needle).join('[REDACTED]');
+  if (INVISIBLE_CHAR_RE.test(text)) {
+    const span = findInterruptedSpan(text, needle);
+    if (span) return `${text.slice(0, span[0])}[REDACTED]${text.slice(span[1])}`;
+  }
+  return eraseEncodedSpelling(text, needle);
+}
+
+const REDACT_MAX_VIEWS = 96;
+const REDACT_VIEW_BUDGET_MS = 250;
+
+function redactionViews(d, text) {
+  try {
+    if (!d.mayHaveEncodedContent(text)) return [];
+    return d.normalizer.normalize(text).slice(1, REDACT_MAX_VIEWS);
+  } catch {
+    return [];  
+  }
+}
+
 function redactSecrets(d, text) {
   let out = redactPemBlocks(text);
   try {
@@ -2995,6 +3064,16 @@ function redactSecrets(d, text) {
       if (s.match) out = out.split(s.match).join(s.redacted ?? '[REDACTED]');
     }
   } catch {
+  }
+  const deadline = performance.now() + REDACT_VIEW_BUDGET_MS;
+  for (const view of redactionViews(d, out)) {
+    if (performance.now() >= deadline) break;
+    try {
+      for (const s of d.secretScanner.scan(view)) {
+        if (s.match) out = eraseSpelling(out, s.match);
+      }
+    } catch {
+    }
   }
   return out;
 }
@@ -3048,10 +3127,23 @@ function r1(n) {
   return Math.round(n * 10) / 10;
 }
 
+function scrubForTrail(d, text) {
+  const claimed = redactSecrets(d, text);
+  try {
+    let anchoredWholeReply = false;
+    try {
+      for (const _s of d.secretScanner.scan(text)) { anchoredWholeReply = true; break; }
+    } catch {   }
+    return sweepPairedSecrets(claimed, { anchoredWholeReply }).text;
+  } catch {
+    return claimed;  
+  }
+}
+
 function auditSubject(d, raw, fallback) {
   const text = typeof raw === 'string' ? raw : String(raw ?? '');
   if (text.trim()) {
-    const redacted = redactSecrets(d, text.slice(0, REDACT_SCAN_BYTES)).slice(0, AUDIT_EXCERPT_CHARS);
+    const redacted = scrubForTrail(d, text.slice(0, REDACT_SCAN_BYTES)).slice(0, AUDIT_EXCERPT_CHARS);
     if (redacted.trim()) return redacted;
   }
   return fallback;
@@ -4115,12 +4207,7 @@ async function main() {
     let rewrote = false;
     if (redactable && mode === 'enforce') {
       try {
-        const claimed = redactSecrets(d, text);
-        let anchoredWholeReply = false;
-        try {
-          for (const _s of d.secretScanner.scan(text)) { anchoredWholeReply = true; break; }
-        } catch {   }
-        const safe = sweepPairedSecrets(claimed, { anchoredWholeReply }).text;
+        const safe = scrubForTrail(d, text);
         if (safe !== text && safe.length >= text.length - REDACT_LENGTH_SLACK) {
           out.hookSpecificOutput = { hookEventName: 'MessageDisplay', displayContent: safe };
           rewrote = true;
